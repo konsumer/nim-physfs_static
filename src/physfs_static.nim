@@ -86,7 +86,7 @@ proc mountMemory*(mem: string, newDir:string, mountPoint:string, appendToPath:bo
   return PHYSFS_mountMemory(unsafeAddr mem[0], mem.len, nil, cstring(newDir), cstring(mountPoint), (if appendToPath: cint(1) else: cint(0))) == 1
 
 proc getWriteDir*():string =
-  return cstring PHYSFS_getWriteDir()
+  return $PHYSFS_getWriteDir()
 
 proc readFile*(filepath: string): string =
   if not exists(filepath):

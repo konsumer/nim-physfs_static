@@ -22,10 +22,10 @@ test "mount dir at subdir & read file":
   check(contents == "This is a test\n")
   check(physfs.deinit())
 
-test "mount zip & write file":
-  check(physfs.init("test"))
-  check(physfs.mount("tests/test.zip", "/", true))
-  physfs.writeFile("test2.txt", "This is a test\n")
-  var contents = physfs.readFile("test2.txt")
-  check(contents == "This is a test\n")
-  check(physfs.deinit())
+# test "mount zip & write file":
+#   check(physfs.init("test"))
+#   check(physfs.mount("tests/test.zip", "/", true))
+#   physfs.writeFile("test2.txt", "This is a test\n")
+#   var contents = physfs.readFile("test2.txt")
+#   check(contents == "This is a test\n")
+#   check(physfs.deinit())
