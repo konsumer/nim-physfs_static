@@ -5,7 +5,7 @@ This will statically compile physfs with the options you want, and wrap it a bit
 Add this to your project's .nimble file:
 
 ```
-requires "https://github.com/konsumer/nim-physfs_static.git"
+requires "physfs_static >= 0.0.0"
 ```
 
 ## usage
@@ -13,8 +13,9 @@ requires "https://github.com/konsumer/nim-physfs_static.git"
 ```nim
 import physfs_static as physfs
 
+# optional:
 # set these to 1/0 to enable/disable
-# not all are needed, they are 0, by default
+# not all are needed, they are 1, by default
 {.emit: """
 
 #define PHYSFS_SUPPORTS_ZIP 1

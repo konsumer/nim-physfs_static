@@ -1,10 +1,6 @@
 import unittest
 import physfs_static as physfs
 
-{.emit: """
-#define PHYSFS_SUPPORTS_ZIP 1
-""".}
-
 test "mount zip & read file":
   check(physfs.init("test"))
   check(physfs.mount("tests/test.zip", "/", true))
