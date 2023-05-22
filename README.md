@@ -101,3 +101,9 @@ proc writeBytes*(handle: ptr PHYSFS_File, buffer: pointer, len: uint64): int64
 ## Close the file
 proc close*(handle: ptr PHYSFS_File)
 ```
+
+
+## TODO
+
+- get `write` working
+- wrap & document lots more functions (use nim types, etc)
