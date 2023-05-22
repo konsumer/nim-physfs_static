@@ -5,7 +5,7 @@ This will statically compile physfs with the options you want, and wrap it a bit
 Add this to your project's .nimble file:
 
 ```
-requires "physfs_static >= 0.0.0"
+requires "https://github.com/konsumer/nim-physfs_static.git"
 ```
 
 ## usage
@@ -31,7 +31,7 @@ import physfs_static as physfs
 """.}
 
 # initialize and mount a file
-if physfs.init("yourapp") && physfs.mount("file.zip", "", true):
+if physfs.init("yourapp") and physfs.mount("file.zip", "", true):
   # read a file
   var contents = physfs.readFile("mydir/myfile.ext")
   # shutdown physfs
