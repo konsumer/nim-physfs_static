@@ -1,6 +1,14 @@
 This will statically compile physfs with the options you want, and wrap it a bit friendlier, for nim.
 
-Basic usage:
+## installation
+
+Add this to your n imble file:
+
+```
+requires "physfs_static >= 0.0.0"
+```
+
+## usage
 
 ```nim
 import physfs_static as physfs
