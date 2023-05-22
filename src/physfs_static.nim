@@ -44,9 +44,11 @@ proc PHYSFS_init(name: cstring): cint
 proc PHYSFS_mount(newDir: cstring, mountPoint: cstring, appendToPath:cint): cint
 proc PHYSFS_openRead(filename: cstring): ptr PHYSFS_File
 proc PHYSFS_openWrite(filename: cstring): ptr PHYSFS_File
+proc PHYSFS_openAppend(filename: cstring): ptr PHYSFS_File
 proc PHYSFS_exists(name: cstring): int
 proc PHYSFS_deinit(): cint
 proc PHYSFS_mountMemory(buff: pointer, length:int64, del:pointer, newDir:cstring, mountPoint:cstring, appendToPath:cint): cint
+proc PHYSFS_getWriteDir(): cstring
 {.pop.}
 
 {.push callconv: cdecl, importc:"PHYSFS_$1".}
@@ -74,11 +76,17 @@ proc openRead*(filename: string): ptr PHYSFS_File =
 proc openWrite*(filename: string): ptr PHYSFS_File =
   return PHYSFS_openWrite(cstring(filename))
 
+proc openAppend*(filename: string): ptr PHYSFS_File =
+  return PHYSFS_openAppend(cstring(filename))
+
 proc exists*(name: string): bool =
   return PHYSFS_exists(cstring(name)) == 1
 
 proc mountMemory*(mem: string, newDir:string, mountPoint:string, appendToPath:bool): bool =
   return PHYSFS_mountMemory(unsafeAddr mem[0], mem.len, nil, cstring(newDir), cstring(mountPoint), (if appendToPath: cint(1) else: cint(0))) == 1
+
+proc getWriteDir*():string =
+  return cstring PHYSFS_getWriteDir()
 
 proc readFile*(filepath: string): string =
   if not exists(filepath):
@@ -91,3 +99,10 @@ proc readFile*(filepath: string): string =
     raise newException(IOError, "Could not read " & filepath)
   close(f)
   return outBytes
+
+proc writeFile*(filepath: string, contents: string) =
+  let f = openWrite(filepath)
+  var byteswritten = writeBytes(f, unsafeAddr contents[0], uint64 contents.len)
+  if byteswritten != contents.len:
+    raise newException(IOError, "Could not write " & filepath)
+  close(f)
