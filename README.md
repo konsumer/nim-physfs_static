@@ -2,7 +2,7 @@ This will statically compile physfs with the options you want, and wrap it a bit
 
 ## installation
 
-Add this to your n imble file:
+Add this to your project's .nimble file:
 
 ```
 requires "physfs_static >= 0.0.0"
